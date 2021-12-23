@@ -30,7 +30,7 @@ async function getUserById(req, res, next) {
       data: dbRes,
     });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     next(error);
   }
 }

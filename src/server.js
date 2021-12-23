@@ -10,15 +10,17 @@ const app = express();
 app.use(json());
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(errorMiddleware);
+
 
 app.use("/products", ProductRouter);
-app.use("/users",errorMiddleware, UserRouter);
+app.use("/users", UserRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send({
     data: "hello-mundo",
   });
 });
+
+app.use(errorMiddleware);
 
 module.exports = app;
