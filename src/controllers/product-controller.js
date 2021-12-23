@@ -55,7 +55,7 @@ async function updateProduct(req, res, next) {
   try {
     const newData = req.body;
     const { productId } = req.params;
-    const dbRes = await db.Product.findOneAndUpdate(productId, newData, {
+    const dbRes = await db.Product.findOneAndUpdate({ _id: productId }, newData, {
       new: true,
       runValidators: true,
     });

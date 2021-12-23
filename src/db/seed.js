@@ -1,5 +1,6 @@
 const axios = require("axios");
 const db = require("../models");
+const { getSeedUsers } = require("./seed-data");
 
 async function seedData() {
   try {
@@ -16,4 +17,15 @@ async function seedData() {
   }
 }
 
-module.exports = seedData;
+async function seedUsers() {
+  try {
+    const users = getSeedUsers();
+    await db.User.deleteMany({});
+
+    await db.User.create([...users]);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = { seedData, seedUsers };
