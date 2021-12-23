@@ -1,5 +1,5 @@
 const app = require("./server");
-const seedData = require("./db/seed");
+const {seedData,seedPurchases} = require("./db/seed");
 const connect = require("./db/connect");
 const db = require("./models");
 
@@ -9,6 +9,8 @@ const db = require("./models");
     console.log(`Server listening on http:localhost:4000`);
     const data = await db.Product.find();
     data[0] ? null : seedData();
+    const purchases = await db.Purchase.find();
+    purchases[0] ? null : seedPurchases();
   });
 })();
 
