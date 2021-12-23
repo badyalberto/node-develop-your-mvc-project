@@ -2,7 +2,7 @@ const express = require("express");
 const { json } = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const { UserRouter, ProductRouter } = require("./routes");
+const { UserRouter, ProductRouter,PurchaseRouter } = require("./routes");
 const { errorMiddleware } = require("./middlewares");
 
 const app = express();
@@ -14,6 +14,7 @@ app.use(helmet());
 
 app.use("/products", ProductRouter);
 app.use("/users", UserRouter);
+app.use("/purchases", PurchaseRouter);
 
 app.get("/", (req, res) => {
   res.status(200).send({

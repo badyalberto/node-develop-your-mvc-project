@@ -1,5 +1,5 @@
 const app = require("./server");
-const { seedData, seedUsers } = require("./db/seed");
+const { seedData, seedUsers,seedPurchases } = require("./db/seed");
 const connect = require("./db/connect");
 const db = require("./models");
 
@@ -11,6 +11,8 @@ const db = require("./models");
     data[0] ? null : seedData();
     const users = await db.User.find();
     users[0] ? null : seedUsers();
+    const purchases = await db.Purchase.find();
+    purchases[0] ? null : seedPurchases();
   });
 })();
 
