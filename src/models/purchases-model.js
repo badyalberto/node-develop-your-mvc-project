@@ -9,13 +9,15 @@ const PurchaseSchema = new mongoose.Schema(
     },
     products: [
       {
-        type: mongoose.Types.ObjectId,
-        required: [true, "Please attach the products of the purchase"],
-        ref: "product",
-      },
-      {
-        type: Number,
-        default: 1,
+        product: {
+          type: mongoose.Types.ObjectId,
+          required: [true, "Please attach the products of the purchase"],
+          ref: "product",
+        },
+        quantity: {
+          type: Number,
+          default: 1,
+        },
       },
     ],
   },

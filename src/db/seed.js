@@ -29,7 +29,7 @@ async function seedUsers() {
 
 async function seedPurchases() {
   try {
-    const purchases = getSeedPurchases();
+    const purchases = await getSeedPurchases();
     await db.Purchase.deleteMany({});
     await db.Purchase.create([...purchases]);
   } catch (error) {

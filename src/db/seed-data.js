@@ -1,3 +1,7 @@
+const userController = require("../controllers/user-controller");
+const productController = require("../controllers/product-controller");
+const db = require("../models");
+
 function getSeedUsers() {
   return [
     {
@@ -24,21 +28,30 @@ function getSeedUsers() {
   ];
 }
 
-function getSeedPurchases() {
-    return [
-      {
-        user: "61c45e9f1c4e6e3337f7e10b",
-        products: ["61c4458885a6f66f5442a51b","61c4458885a6f66f5442a51c","61c4458885a6f66f5442a51d"]
-      },
-      {
-        user: "61c4527b3180ebfa161fe427",
-        products: ["61c4458885a6f66f5442a51c","61c4458885a6f66f5442a51d"]
-      },
-      
-    ];
-  }
+async function getSeedPurchases() {
+  const users = await db.User.find({}, { _id: 1 });
+  const products = await db.Product.find({}, { _id: 1 });
+
+  const user1 = users[0]["_id"].toString();
+  const user2 = users[1]["_id"].toString();
+
+  const productsIds = products.map((product) => {
+    return product["_id"].toString();
+  });
+
+  return [
+    {
+      user: user1,
+      products: [{ product: productsIds[0], quantity: 5 }, {product: productsIds[1]}],
+    },
+    {
+      user: user2,
+      products: [{product: productsIds[0]},{product:  productsIds[1]}, {product: productsIds[2]}],
+    },
+  ];
+}
 
 module.exports = {
-    getSeedPurchases,
-    getSeedUsers
-}
+  getSeedPurchases,
+  getSeedUsers,
+};

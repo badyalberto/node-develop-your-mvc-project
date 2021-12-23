@@ -2,15 +2,17 @@ const db = require("../models");
 
 async function getAllPurchases(req, res, next) {
   try {
-    const dbRes = await db.Purchase.find({});
+    const dbRes = await db.Purchase.find({}).populate(
+      "products.product",
+      "title",
+    );
 
     res.status(200).send({
       success: true,
       data: dbRes,
     });
   } catch (err) {
-    console.log(err.message);
-    // next(err)
+    next(err);
   }
 }
 
@@ -20,15 +22,14 @@ async function getSinglePurchase(req, res, next) {
 
     const dbRes = await db.Purchase.find({
       _id: purchaseId,
-    });
+    }).populate("products.product", "title");
 
     res.status(200).send({
       success: true,
       data: dbRes,
     });
   } catch (err) {
-    console.log(err.message);
-    // next(err)
+    next(err);
   }
 }
 
@@ -43,8 +44,7 @@ async function createPurchase(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err.message);
-    // next(err)
+    next(err);
   }
 }
 
@@ -68,8 +68,7 @@ async function updatePurchase(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err.message);
-    // next(err)
+    next(err);
   }
 }
 
@@ -86,8 +85,7 @@ async function deletePurchase(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err.message);
-    // next(err)
+    next(err);
   }
 }
 
