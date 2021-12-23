@@ -54,6 +54,7 @@ async function updatePurchase(req, res, next) {
 
     const newData = req.body;
 
+<<<<<<< HEAD
     const dbRes = await db.Purchase.findOneAndUpdate(
       { _id: purchaseId },
       newData,
@@ -61,6 +62,11 @@ async function updatePurchase(req, res, next) {
         new: true,
       },
     );
+=======
+    const dbRes = await db.Purchase.findOneAndUpdate(purchaseId, newData, {
+      new: true,
+    });
+>>>>>>> baabaec4b38cd157efe8b41267456f4e1ec497a6
 
     res.status(205).send({
       success: true,
