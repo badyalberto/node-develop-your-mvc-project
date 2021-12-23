@@ -2,7 +2,7 @@ const db = require("../models");
 
 async function getAllPurchases(req, res, next) {
   try {
-    const dbRes = db.Purchase.find({});
+    const dbRes = await db.Purchase.find({});
 
     res.status(200).send({
       success: true,
@@ -18,7 +18,7 @@ async function getSinglePurchase(req, res, next) {
   try {
     const { purchaseId } = req.params;
 
-    const dbRes = db.Purchase.find({
+    const dbRes = await db.Purchase.find({
       _id: purchaseId,
     });
 
@@ -36,7 +36,7 @@ async function createPurchase(req, res, next) {
   try {
     const newPurchase = req.body;
 
-    dbRes = db.Purchase.create(newPurchase);
+    dbRes = await db.Purchase.create(newPurchase);
 
     res.status(201).send({
       success: true,
@@ -54,9 +54,13 @@ async function updatePurchase(req, res, next) {
 
     const newData = req.body;
 
-    const dbRes = db.Purchase.findOneAndUpdate(purchaseId, newData, {
-      new: true,
-    });
+    const dbRes = await db.Purchase.findOneAndUpdate(
+      { _id: purchaseId },
+      newData,
+      {
+        new: true,
+      },
+    );
 
     res.status(205).send({
       success: true,
@@ -73,7 +77,7 @@ async function deletePurchase(req, res, next) {
   try {
     const { purchaseId } = req.params;
 
-    const dbRes = db.Purchase.findOneAndDelete({
+    const dbRes = await db.Purchase.findOneAndDelete({
       _id: purchaseId,
     });
     res.status(200).send({
