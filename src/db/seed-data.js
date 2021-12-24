@@ -1,5 +1,3 @@
-const userController = require("../controllers/user-controller");
-const productController = require("../controllers/product-controller");
 const db = require("../models");
 
 function getSeedUsers() {
@@ -42,11 +40,18 @@ async function getSeedPurchases() {
   return [
     {
       user: user1,
-      products: [{ product: productsIds[0], quantity: 5 }, {product: productsIds[1]}],
+      products: [
+        { product: productsIds[0], quantity: 5 },
+        { product: productsIds[1] },
+      ],
     },
     {
       user: user2,
-      products: [{product: productsIds[0]},{product:  productsIds[1]}, {product: productsIds[2]}],
+      products: [
+        { product: productsIds[0] },
+        { product: productsIds[1] },
+        { product: productsIds[2] },
+      ],
     },
   ];
 }
