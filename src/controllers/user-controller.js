@@ -9,7 +9,6 @@ async function getAllUsers(req, res, next) {
       data: dbRes,
     });
   } catch (error) {
-  
     next(error);
   }
 }
@@ -90,10 +89,37 @@ async function deleteUser(req, res, next) {
   }
 }
 
+async function signUp(req, res, next) {
+  try {
+    const { email } = req.user;
+    const { firstName, lastName, firebaseId } = req.body;
+
+    const user = await db.User.findOne({ email: email });
+
+    if (user) return res.status(200);
+
+    const newUser = await db.User.create({
+      firebaseId: firebaseId,
+      name: firstName,
+      surname: lastName,
+      email: email,
+    });
+    res.status(201).send({
+      success: true,
+      message: "New user registered",
+      data: newUser,
+    });
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
   deleteUser,
+  signUp,
 };
