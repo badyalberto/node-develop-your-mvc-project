@@ -5,12 +5,12 @@ const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "The name must have a name"],
+      //required: [true,"The name must have a name"],
       trim: true,
     },
     surname: {
       type: String,
-      required: [true, "The surname must have a surname"],
+      //required: [true,"The surname must have a surname"],
       trim: true,
     },
     email: {
@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema(
         validator: (value) => isEmail(value),
         message: (props) => `The email ${props.value} is not valid`,
       },
+    },
+    password: {
+      type: String,
+      unique: true,
     },
     address: {
       type: String,
@@ -39,7 +43,7 @@ const UserSchema = new mongoose.Schema(
       type: [String],
       enum: ["Customer", "Employee", "Admin"],
       required: true,
-      default: "Customer",
+      default: 'Customer'
     },
   },
   { timestamps: true },
