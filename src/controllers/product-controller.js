@@ -2,15 +2,14 @@ const db = require("../models");
 
 async function getAllProducts(req, res, next) {
   try {
-    const dbRes = await db.Product.find({}, { _id: 0, __v: 0 });
+    const dbRes = await db.Product.find({}, { __v: 0 });
 
     res.status(200).send({
       success: true,
       data: dbRes,
     });
   } catch (err) {
-    console.log(err.message);
-    // next(err)
+    next(err);
   }
 }
 
@@ -30,8 +29,7 @@ async function getSingleProduct(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err);
-    // next(err)
+    next(err);
   }
 }
 
@@ -45,8 +43,7 @@ async function createProduct(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err);
-    // next(err)
+    next(err);
   }
 }
 
@@ -54,18 +51,21 @@ async function updateProduct(req, res, next) {
   try {
     const newData = req.body;
     const { productId } = req.params;
-    const dbRes = await db.Product.findOneAndUpdate({ _id: productId }, newData, {
-      new: true,
-      runValidators: true,
-    });
+    const dbRes = await db.Product.findOneAndUpdate(
+      { _id: productId },
+      newData,
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
 
     res.status(201).send({
       success: true,
       data: dbRes,
     });
   } catch (err) {
-    console.log(err);
-    // next(err)
+    next(err);
   }
 }
 
@@ -82,8 +82,7 @@ async function deleteProduct(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err);
-    // next(err)
+    next(err);
   }
 }
 
