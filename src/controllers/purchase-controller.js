@@ -36,6 +36,7 @@ async function getSinglePurchase(req, res, next) {
 async function createPurchase(req, res, next) {
   try {
     const newPurchase = req.body;
+    console.log(newPurchase);
 
     dbRes = await db.Purchase.create(newPurchase);
 
