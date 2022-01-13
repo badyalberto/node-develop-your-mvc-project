@@ -4,6 +4,7 @@ const AuthController = require("../controllers/auth-controller");
 
 const UserRouter = Router();
 
+UserRouter.get("/users", UserController.getAllUsers);
 UserRouter.get("/users/:userId", UserController.getUserById);
 UserRouter.post("/users", UserController.createUser);
 UserRouter.post("/sign-up", UserController.signUp);

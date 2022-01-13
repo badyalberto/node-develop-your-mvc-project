@@ -9,8 +9,7 @@ async function getAllProducts(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err.message);
-    // next(err)
+    next(err);
   }
 }
 
@@ -30,8 +29,7 @@ async function getSingleProduct(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err);
-    // next(err)
+    next(err);
   }
 }
 
@@ -45,15 +43,16 @@ async function createProduct(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err);
-    // next(err)
+    next(err);
   }
 }
 
 async function updateProduct(req, res, next) {
   try {
-    const newData = req.body;
+    const { newData } = req.body;
     const { productId } = req.params;
+    console.log(newData);
+    console.log(productId);
     const dbRes = await db.Product.findOneAndUpdate(
       { _id: productId },
       newData,
@@ -68,8 +67,7 @@ async function updateProduct(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err);
-    // next(err)
+    next(err);
   }
 }
 
@@ -86,8 +84,7 @@ async function deleteProduct(req, res, next) {
       data: dbRes,
     });
   } catch (err) {
-    console.log(err);
-    // next(err)
+    next(err);
   }
 }
 

@@ -51,7 +51,7 @@ async function createUser(req, res, next) {
 
 async function updateUser(req, res, next) {
   try {
-    const newData = req.body;
+    const { newData } = req.body;
     const { userId } = req.params;
 
     const dbRes = await db.User.findOneAndUpdate({ _id: userId }, newData, {
