@@ -91,10 +91,31 @@ async function deleteProduct(req, res, next) {
   }
 }
 
+async function getCategory(req, res, next) {
+  try {
+    const { category } = req.params;
+
+    const dbRes = await db.Product.find(
+      {
+        category: category,
+      },
+      { __v: 0 },
+    );
+
+    res.status(200).send({
+      success: true,
+      data: dbRes,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   getAllProducts,
   getSingleProduct,
   createProduct,
   updateProduct,
   deleteProduct,
+  getCategory,
 };
