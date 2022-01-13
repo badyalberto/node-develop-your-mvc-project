@@ -110,6 +110,7 @@ async function signUp(req, res, next) {
       data: newUser,
     });
   } catch (err) {
+    console.log(err);
     next(err);
   }
 }

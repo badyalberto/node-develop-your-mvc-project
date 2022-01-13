@@ -23,10 +23,6 @@ const UserSchema = new mongoose.Schema(
         message: (props) => `The email ${props.value} is not valid`,
       },
     },
-    password: {
-      type: String,
-      unique: true,
-    },
     address: {
       type: String,
       trim: true,
@@ -43,7 +39,7 @@ const UserSchema = new mongoose.Schema(
       type: [String],
       enum: ["Customer", "Employee", "Admin"],
       required: true,
-      default: 'Customer'
+      default: "Customer",
     },
   },
   { timestamps: true },
